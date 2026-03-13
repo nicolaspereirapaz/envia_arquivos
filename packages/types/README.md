@@ -1,0 +1,2 @@
+# Types
+Tipos compartilhados.

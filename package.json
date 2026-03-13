@@ -1,0 +1,15 @@
+{
+  "name": "farefoto",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Monorepo do sistema Fare Foto",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "echo Definir depois",
+    "build": "echo Definir depois",
+    "test": "echo Definir depois"
+  }
+}
