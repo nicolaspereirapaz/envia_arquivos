@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { FareFotoStoreService } from '../common/persistence/fare-foto-store.service';
 import type { Pedido } from '../pedidos/pedido.interface';
 import { PedidosService } from '../pedidos/pedidos.service';
 import { ClientesController } from './clientes.controller';
@@ -18,6 +19,7 @@ describe('ClientesController', () => {
       providers: [
         ClientesService,
         ClientesRepository,
+        FareFotoStoreService,
         {
           provide: PedidosService,
           useValue: pedidosService,

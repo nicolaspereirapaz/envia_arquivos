@@ -2,6 +2,7 @@ import { NotFoundException } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 import type { Cliente } from '../clientes/cliente.interface';
 import { ClientesService } from '../clientes/clientes.service';
+import { FareFotoStoreService } from '../common/persistence/fare-foto-store.service';
 import { DocumentosService } from '../documentos/documentos.service';
 import { FotosService } from '../fotos/fotos.service';
 import { NotificacoesService } from '../notificacoes/notificacoes.service';
@@ -67,6 +68,7 @@ describe('PedidosService', () => {
         PedidosService,
         PedidosRepository,
         PedidoItensRepository,
+        FareFotoStoreService,
         PrecificacaoService,
         {
           provide: FotosService,

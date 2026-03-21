@@ -12,3 +12,5 @@ Thumbs.db
 tmp/
 temp/
 uploads/
+!apps/api/src/uploads/
+!apps/api/src/uploads/**

@@ -1,6 +1,13 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
-import { IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, Min } from 'class-validator';
+import {
+  IsBoolean,
+  IsInt,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  Min,
+} from 'class-validator';
 import { toBoolean } from '../../common/transforms/to-boolean';
 import { toTrimmedString } from '../../common/transforms/to-trimmed-string';
 
@@ -11,11 +18,11 @@ export class CreateItemDocumentoDto {
   @IsNotEmpty()
   pedidoId: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
+  @IsOptional()
   @Transform(({ value }) => toTrimmedString(value))
   @IsString()
-  @IsNotEmpty()
-  arquivoNome: string;
+  arquivoNome?: string;
 
   @ApiPropertyOptional()
   @IsOptional()

@@ -8,8 +8,19 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "echo Definir depois",
-    "build": "echo Definir depois",
-    "test": "echo Definir depois"
+    "dev": "npm run dev:api",
+    "dev:api": "npm run start:dev --workspace=api",
+    "dev:admin": "npm run dev --workspace=admin",
+    "dev:web": "npm run dev --workspace=web",
+    "start:final": "node ./scripts/start-final-mode.mjs",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "test:e2e": "npm run test:e2e --workspace=api",
+    "ci:validate": "npm run lint && npm run test && npm run build && npm run test:e2e",
+    "docker:up": "docker compose up --build"
+  },
+  "devDependencies": {
+    "embedded-postgres": "^18.3.0-beta.16"
   }
 }

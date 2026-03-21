@@ -12,17 +12,20 @@ import {
   Min,
   ValidateNested,
 } from 'class-validator';
-import { PRAZOS_PEDIDO, type PrazoPedido } from '../../common/types/prazo-pedido.type';
+import {
+  PRAZOS_PEDIDO,
+  type PrazoPedido,
+} from '../../common/types/prazo-pedido.type';
 import { toBoolean } from '../../common/transforms/to-boolean';
 import { toTrimmedString } from '../../common/transforms/to-trimmed-string';
 import { ItemPrecificacaoDto } from '../../precificacao/dto/item-precificacao.dto';
 
 export class CreatePedidoFotoItemDto {
-  @ApiProperty()
+  @ApiPropertyOptional()
+  @IsOptional()
   @Transform(({ value }) => toTrimmedString(value))
   @IsString()
-  @IsNotEmpty()
-  arquivoNome: string;
+  arquivoNome?: string;
 
   @ApiPropertyOptional()
   @IsOptional()
@@ -68,11 +71,11 @@ export class CreatePedidoFotoItemDto {
 }
 
 export class CreatePedidoDocumentoItemDto {
-  @ApiProperty()
+  @ApiPropertyOptional()
+  @IsOptional()
   @Transform(({ value }) => toTrimmedString(value))
   @IsString()
-  @IsNotEmpty()
-  arquivoNome: string;
+  arquivoNome?: string;
 
   @ApiPropertyOptional()
   @IsOptional()

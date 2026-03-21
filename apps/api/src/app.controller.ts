@@ -9,4 +9,9 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get('health')
+  getHealth(): { status: 'ok'; persistence: string } {
+    return this.appService.getHealth();
+  }
 }

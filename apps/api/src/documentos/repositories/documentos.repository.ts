@@ -1,29 +1,36 @@
 import { Injectable } from '@nestjs/common';
+import { FareFotoStoreService } from '../../common/persistence/fare-foto-store.service';
 import type { ItemDocumento } from '../item-documento.interface';
 
 @Injectable()
 export class DocumentosRepository {
-  private readonly documentos: ItemDocumento[] = [];
+  constructor(private readonly store: FareFotoStoreService) {}
 
   create(item: ItemDocumento): ItemDocumento {
-    this.documentos.push(item);
+    const documentos = this.store.read('documentos');
+    documentos.push(item);
+    this.store.write('documentos', documentos);
     return item;
   }
 
   createMany(itens: ItemDocumento[]): ItemDocumento[] {
-    itens.forEach((item) => this.documentos.push(item));
+    const documentos = this.store.read('documentos');
+    documentos.push(...itens);
+    this.store.write('documentos', documentos);
     return itens;
   }
 
   findAll(): ItemDocumento[] {
-    return this.documentos;
+    return this.store.read('documentos');
   }
 
   findById(id: string): ItemDocumento | undefined {
-    return this.documentos.find((item) => item.id === id);
+    return this.store.read('documentos').find((item) => item.id === id);
   }
 
   findByPedidoId(pedidoId: string): ItemDocumento[] {
-    return this.documentos.filter((item) => item.pedidoId === pedidoId);
+    return this.store
+      .read('documentos')
+      .filter((item) => item.pedidoId === pedidoId);
   }
 }

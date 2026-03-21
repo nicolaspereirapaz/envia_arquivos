@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { createId } from '../common/utils/create-id';
 import { PedidosService } from '../pedidos/pedidos.service';
+import { UploadsService } from '../uploads/uploads.service';
 import { FotosRepository } from './repositories/fotos.repository';
 import type { CreateItemFotoDto } from './dto/create-item-foto.dto';
 import type { ItemFoto } from './item-foto.interface';
@@ -16,18 +17,24 @@ export class FotosService {
     private readonly fotosRepository: FotosRepository,
     @Inject(forwardRef(() => PedidosService))
     private readonly pedidosService: PedidosService,
+    private readonly uploadsService: UploadsService,
   ) {}
 
   criar(dados: CreateItemFotoDto): ItemFoto {
     const pedidoId = dados.pedidoId.trim();
+    const arquivo = this.uploadsService.prepararArquivoParaCadastro(
+      'photos',
+      dados.arquivoNome,
+      dados.arquivoUrl,
+    );
 
     this.pedidosService.buscarPorId(pedidoId);
 
     return this.fotosRepository.create({
       id: createId(),
       pedidoId,
-      arquivoNome: dados.arquivoNome.trim(),
-      arquivoUrl: this.normalizarTextoOpcional(dados.arquivoUrl),
+      arquivoNome: arquivo.arquivoNome,
+      arquivoUrl: arquivo.arquivoUrl,
       tamanho: dados.tamanho.trim(),
       quantidade: dados.quantidade,
       brilho: dados.brilho,
@@ -40,9 +47,9 @@ export class FotosService {
 
   criarMuitos(dados: CreateItemFotoDto[]): ItemFoto[] {
     const itens = dados.map((item) => this.criar(item));
-    return this.fotosRepository.findAll().filter((foto) =>
-      itens.some((item) => item.id === foto.id),
-    );
+    return this.fotosRepository
+      .findAll()
+      .filter((foto) => itens.some((item) => item.id === foto.id));
   }
 
   listar(): ItemFoto[] {

@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fff7ef;
+  --foreground: #1b2135;
+  --color-muted: #5d6377;
+  --color-line: rgba(27, 33, 53, 0.12);
+  --color-surface: rgba(255, 255, 255, 0.82);
+  --color-surface-strong: rgba(255, 252, 247, 0.94);
+  --color-panel: rgba(255, 255, 255, 0.72);
+  --color-brand: #ef6a45;
+  --color-brand-strong: #0b7a68;
+  --color-brand-soft: rgba(239, 106, 69, 0.14);
+  --color-brand-alt-soft: rgba(11, 122, 104, 0.14);
+  --shadow-soft: 0 28px 72px rgba(37, 30, 48, 0.12);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--color-muted);
+  --color-line: var(--color-line);
+  --color-surface: var(--color-surface);
+  --color-surface-strong: var(--color-surface-strong);
+  --color-panel: var(--color-panel);
+  --color-brand: var(--color-brand);
+  --color-brand-strong: var(--color-brand-strong);
+  --color-brand-soft: var(--color-brand-soft);
+  --color-brand-alt-soft: var(--color-brand-alt-soft);
+  --font-sans: var(--font-manrope);
+  --font-display: var(--font-fraunces);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(239, 106, 69, 0.2), transparent 26%),
+    radial-gradient(circle at 85% 15%, rgba(11, 122, 104, 0.16), transparent 18%),
+    linear-gradient(180deg, #fff6ed 0%, #fdeedc 100%);
+  color: var(--foreground);
+  font-family: var(--font-manrope), Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(239, 106, 69, 0.22);
+}

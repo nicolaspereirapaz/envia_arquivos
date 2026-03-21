@@ -5,7 +5,10 @@ import {
   NotFoundException,
   forwardRef,
 } from '@nestjs/common';
-import { PRAZOS_PEDIDO, type PrazoPedido } from '../common/types/prazo-pedido.type';
+import {
+  PRAZOS_PEDIDO,
+  type PrazoPedido,
+} from '../common/types/prazo-pedido.type';
 import { createId } from '../common/utils/create-id';
 import { ClientesService } from '../clientes/clientes.service';
 import { DocumentosService } from '../documentos/documentos.service';
@@ -123,14 +126,16 @@ export class PedidosService {
   }
 
   atualizarStatus(id: string, status: string): Pedido {
-    const pedido = this.buscarPorId(id);
+    const pedidoAtual = this.buscarPorId(id);
 
     if (!PEDIDO_STATUS.includes(status as PedidoStatus)) {
       throw new BadRequestException('Status de pedido invalido.');
     }
 
-    pedido.status = status as PedidoStatus;
-    return pedido;
+    return this.pedidosRepository.update({
+      ...pedidoAtual,
+      status: status as PedidoStatus,
+    });
   }
 
   private validarPrazo(prazo: string): PrazoPedido {

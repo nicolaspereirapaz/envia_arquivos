@@ -38,14 +38,17 @@ export class WhatsappService {
     if (fotos.length > 0) {
       linhas.push(
         ...fotos.map(
-          (item) => `- ${item.arquivoNome} | ${item.tamanho} | qtd ${item.quantidade}`,
+          (item) =>
+            `- ${item.arquivoNome} | ${item.tamanho} | qtd ${item.quantidade}`,
         ),
       );
     } else if (pedido.itens.some((item) => item.tipo === 'foto')) {
       linhas.push(
         ...pedido.itens
           .filter((item) => item.tipo === 'foto')
-          .map((item) => `- item foto | ${item.tamanho} | qtd ${item.quantidade}`),
+          .map(
+            (item) => `- item foto | ${item.tamanho} | qtd ${item.quantidade}`,
+          ),
       );
     } else {
       linhas.push('- Nenhuma foto');

@@ -10,11 +10,11 @@ export class CreateItemFotoDto {
   @IsNotEmpty()
   pedidoId: string;
 
-  @ApiProperty()
+  @ApiPropertyOptional()
+  @IsOptional()
   @Transform(({ value }) => toTrimmedString(value))
   @IsString()
-  @IsNotEmpty()
-  arquivoNome: string;
+  arquivoNome?: string;
 
   @ApiPropertyOptional()
   @IsOptional()

@@ -7,6 +7,11 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.enableShutdownHooks();
+
+  app.enableCors({
+    origin: true,
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({

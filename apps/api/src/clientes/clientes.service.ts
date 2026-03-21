@@ -48,7 +48,10 @@ export class ClientesService {
   }
 
   atualizar(id: string, dados: UpdateClienteDto): Cliente {
-    const cliente = this.buscarPorId(id);
+    const clienteAtual = this.buscarPorId(id);
+    const cliente: Cliente = {
+      ...clienteAtual,
+    };
 
     if (dados.nome !== undefined) {
       cliente.nome = dados.nome.trim();
@@ -66,7 +69,7 @@ export class ClientesService {
       cliente.observacoes = this.normalizarTextoOpcional(dados.observacoes);
     }
 
-    return cliente;
+    return this.clientesRepository.update(cliente);
   }
 
   remover(id: string): void {

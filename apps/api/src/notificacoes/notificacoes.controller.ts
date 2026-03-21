@@ -1,5 +1,15 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  MessageEvent,
+  Param,
+  Patch,
+  Post,
+  Sse,
+} from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import type { Observable } from 'rxjs';
 import { NotificacoesService } from './notificacoes.service';
 import { CreateNotificacaoDto } from './dto/create-notificacao.dto';
 import type { Notificacao } from './notificacao.interface';
@@ -13,6 +23,12 @@ export class NotificacoesController {
   @ApiOperation({ summary: 'Lista notificacoes' })
   listar(): Notificacao[] {
     return this.notificacoesService.listar();
+  }
+
+  @Sse('stream')
+  @ApiOperation({ summary: 'Abre stream SSE de notificacoes' })
+  stream(): Observable<MessageEvent> {
+    return this.notificacoesService.stream();
   }
 
   @Post()

@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ClientesModule } from './clientes/clientes.module';
+import { FareFotoStoreModule } from './common/persistence/fare-foto-store.module';
 import { DocumentosModule } from './documentos/documentos.module';
 import { FotosModule } from './fotos/fotos.module';
 import { NotificacoesModule } from './notificacoes/notificacoes.module';
@@ -12,6 +13,7 @@ import { WhatsappModule } from './whatsapp/whatsapp.module';
 
 @Module({
   imports: [
+    FareFotoStoreModule,
     ClientesModule,
     PrecificacaoModule,
     FotosModule,
